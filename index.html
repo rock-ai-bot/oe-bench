@@ -13,6 +13,7 @@
 <button>1</button><button>2</button><button>3</button>
 <button>0</button><button>.</button><button>C</button>
 <button>+</button><button>-</button><button>=</button>
+<button>±</button>
 </div>
 <script>
 (function () {
@@ -57,7 +58,11 @@
       display.textContent = format(entry);
       return;
     }
-    if (key === 'C') {
+    if (key === '±') {
+      if (!/^0*\.?0*$/.test(entry)) {
+        entry = entry.charAt(0) === '-' ? entry.slice(1) : '-' + entry;
+      }
+    } else if (key === 'C') {
       entry = '0';
       total = null;
       op = null;
