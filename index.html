@@ -28,7 +28,14 @@
     }
     var dot = entry.indexOf('.');
     if (dot !== -1 && entry.length - dot - 1 > 4) entry = entry.slice(0, dot + 5);
-    display.textContent = entry;
+    display.textContent = format(entry);
+  }
+
+  // Entry keeps zeros typed after the point so later digits land correctly;
+  // the display drops them, except for the bare "0." of an unfinished number.
+  function format(text) {
+    if (text.indexOf('.') === -1 || text.charAt(text.length - 1) === '.') return text;
+    return text.replace(/0+$/, '').replace(/\.$/, '');
   }
 
   var buttons = document.querySelectorAll('button');

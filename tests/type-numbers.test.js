@@ -83,3 +83,19 @@ test('reloading the page starts again from 0', () => {
   loadPage().press('7', '2');
   assert.strictEqual(loadPage().display(), '0');
 });
+
+test('1 . 5 0 shows 1.5: no trailing zeros', () => {
+  assert.strictEqual(typed('1', '.', '5', '0'), '1.5');
+});
+
+test('0 . 0 shows 0: no trailing zeros', () => {
+  assert.strictEqual(typed('0', '.', '0'), '0');
+});
+
+test('1 . 0 5 shows 1.05: zeros typed before a digit are kept', () => {
+  assert.strictEqual(typed('1', '.', '0', '5'), '1.05');
+});
+
+test('1 . 5 0 3 shows 1.503: a zero typed mid-number is kept once a digit follows', () => {
+  assert.strictEqual(typed('1', '.', '5', '0', '3'), '1.503');
+});
