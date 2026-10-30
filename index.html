@@ -12,16 +12,52 @@
 <button>4</button><button>5</button><button>6</button>
 <button>1</button><button>2</button><button>3</button>
 <button>0</button><button>.</button><button>C</button>
+<button>+</button><button>-</button><button>=</button>
 </div>
 <script>
 (function () {
   var display = document.getElementById('display');
   var entry = '0';
+  var total = null;   // left-hand side of a half-finished sum
+  var op = null;      // pending '+' or '-'
+  var fresh = false;  // the next digit starts a new number
+
+  function apply() {
+    if (op === null) return;
+    var a = parseFloat(total), b = parseFloat(entry);
+    var r = op === '+' ? a + b : a - b;
+    entry = String(parseFloat(r.toFixed(10)));
+    op = null;
+    total = null;
+  }
 
   function press(key) {
+    if (key === '+' || key === '-' || key === '=') {
+      if (!(fresh && op !== null)) apply();
+      if (key === '=') {
+        fresh = true;
+      } else {
+        total = entry;
+        op = key;
+        fresh = true;
+      }
+      display.textContent = format(entry);
+      return;
+    }
     if (key === 'C') {
       entry = '0';
-    } else if (key === '.') {
+      total = null;
+      op = null;
+      fresh = false;
+    } else {
+      if (fresh) { entry = '0'; fresh = false; }
+      typeKey(key);
+    }
+    display.textContent = format(entry);
+  }
+
+  function typeKey(key) {
+    if (key === '.') {
       if (entry.indexOf('.') === -1) entry += '.';
     } else if (entry === '0') {
       entry = key;
@@ -30,7 +66,6 @@
     }
     var dot = entry.indexOf('.');
     if (dot !== -1 && entry.length - dot - 1 > 4) entry = entry.slice(0, dot + 5);
-    display.textContent = format(entry);
   }
 
   // Entry keeps zeros typed after the point so later digits land correctly;
