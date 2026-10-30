@@ -13,14 +13,14 @@
 <button>1</button><button>2</button><button>3</button>
 <button>0</button><button>.</button><button>C</button>
 <button>+</button><button>-</button><button>=</button>
-<button>±</button>
+<button>±</button><button>×</button><button>÷</button>
 </div>
 <script>
 (function () {
   var display = document.getElementById('display');
   var entry = '0';
   var total = null;   // left-hand side of a half-finished sum
-  var op = null;      // pending '+' or '-'
+  var op = null;      // pending '+', '-', '×' or '÷'
   var fresh = false;  // the next digit starts a new number
   var negate = false; // ± was pressed while waiting for the next number
 
@@ -40,14 +40,21 @@
 
   function apply() {
     if (op === null) return;
-    var r = op === '+' ? toUnits(total) + toUnits(entry) : toUnits(total) - toUnits(entry);
-    entry = fromUnits(r);
+    var a = toUnits(total), b = toUnits(entry), r;
+    if (op === '+') r = a + b;
+    else if (op === '-') r = a - b;
+    else if (op === '×') r = a * b / 10000n;
+    else if (b === 0n) r = null;
+    else r = a * 10000n / b;
+    entry = r === null ? 'Error' : fromUnits(r);
     op = null;
     total = null;
   }
 
   function press(key) {
-    if (key === '+' || key === '-' || key === '=') {
+    // After Error only a digit, the point or C does anything.
+    if (entry === 'Error' && key !== 'C' && key !== '.' && !/^[0-9]$/.test(key)) return;
+    if (key === '+' || key === '-' || key === '×' || key === '÷' || key === '=') {
       negate = false;
       if (!(fresh && op !== null)) apply();
       if (key === '=') {
@@ -58,6 +65,7 @@
         fresh = true;
       }
       display.textContent = format(entry);
+      if (entry === 'Error') { total = null; op = null; }
       return;
     }
     if (key === '±') {
@@ -99,6 +107,7 @@
   // Entry keeps zeros typed after the point so later digits land correctly;
   // the display drops them, except for the bare "0." of an unfinished number.
   function format(text) {
+    if (text === 'Error') return text;
     if (text.indexOf('.') === -1 || text.charAt(text.length - 1) === '.') return text;
     return text.replace(/0+$/, '').replace(/\.$/, '');
   }
