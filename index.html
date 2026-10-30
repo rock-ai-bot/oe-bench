@@ -75,9 +75,10 @@
       if (fresh) { entry = '0'; fresh = false; }
       typeKey(key);
       if (negate) {
-        negate = false;
-        if (!/^0*\.?0*$/.test(entry)) entry = '-' + entry;
-        else if (key === '.') entry = '-' + entry;
+        if (key === '.' || !/^0*\.?0*$/.test(entry)) {
+          negate = false;
+          entry = '-' + entry;
+        }
       }
     }
     display.textContent = format(entry);

@@ -56,3 +56,11 @@ test('5 - 3 = still shows 2, and 5 + 3 = still shows 8', () => {
 test('5 + ± 3 = shows 2: ± while waiting for the second number makes it negative', () => {
   assert.strictEqual(typed('5', '+', '±', '3', '='), '2');
 });
+
+test('5 + ± 0 3 = shows 2: the pending sign survives a leading zero', () => {
+  assert.strictEqual(typed('5', '+', '±', '0', '3', '='), '2');
+});
+
+test('5 + ± 0 . 3 = shows 4.7: the pending sign survives a leading zero before the point', () => {
+  assert.strictEqual(typed('5', '+', '±', '0', '.', '3', '='), '4.7');
+});
