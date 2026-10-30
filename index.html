@@ -13,6 +13,7 @@
 <button>1</button><button>2</button><button>3</button>
 <button>0</button><button>.</button><button>C</button>
 <button>+</button><button>-</button><button>=</button>
+<button>±</button>
 </div>
 <script>
 (function () {
@@ -21,6 +22,7 @@
   var total = null;   // left-hand side of a half-finished sum
   var op = null;      // pending '+' or '-'
   var fresh = false;  // the next digit starts a new number
+  var negate = false; // ± was pressed while waiting for the next number
 
   // Exact arithmetic: numbers are held as integers of 1/10000, matching the
   // four decimals the keys can enter, so there is no floating-point noise
@@ -46,6 +48,7 @@
 
   function press(key) {
     if (key === '+' || key === '-' || key === '=') {
+      negate = false;
       if (!(fresh && op !== null)) apply();
       if (key === '=') {
         fresh = true;
@@ -57,14 +60,26 @@
       display.textContent = format(entry);
       return;
     }
-    if (key === 'C') {
+    if (key === '±') {
+      if (!/^0*\.?0*$/.test(entry)) {
+        entry = entry.charAt(0) === '-' ? entry.slice(1) : '-' + entry;
+      }
+      if (fresh && op !== null) negate = !negate;
+    } else if (key === 'C') {
       entry = '0';
       total = null;
       op = null;
       fresh = false;
+      negate = false;
     } else {
       if (fresh) { entry = '0'; fresh = false; }
       typeKey(key);
+      if (negate) {
+        if (key === '.' || !/^0*\.?0*$/.test(entry)) {
+          negate = false;
+          entry = '-' + entry;
+        }
+      }
     }
     display.textContent = format(entry);
   }
