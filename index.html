@@ -11,7 +11,7 @@
 <button>7</button><button>8</button><button>9</button>
 <button>4</button><button>5</button><button>6</button>
 <button>1</button><button>2</button><button>3</button>
-<button>0</button><button>.</button>
+<button>0</button><button>.</button><button>C</button>
 </div>
 <script>
 (function () {
@@ -19,7 +19,9 @@
   var entry = '0';
 
   function press(key) {
-    if (key === '.') {
+    if (key === 'C') {
+      entry = '0';
+    } else if (key === '.') {
       if (entry.indexOf('.') === -1) entry += '.';
     } else if (entry === '0') {
       entry = key;
