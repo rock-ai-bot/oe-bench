@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.1.0...v1.2.0) (2026-10-30)
+
+### Features
+
+* clear the display with the C key ([#13](https://github.com/rock-ai-bot/oe-bench/issues/13)) ([e27fca0](https://github.com/rock-ai-bot/oe-bench/commit/e27fca0e099f2c34fe52de5f1870fbcc1d4a298e))
+
 ## [1.1.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.0.0...v1.1.0) (2026-10-30)
 
 ### Features
