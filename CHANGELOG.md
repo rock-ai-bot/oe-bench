@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.2.0...v1.3.0) (2026-10-30)
+
+### Features
+
+* add and subtract numbers with +, - and = ([#14](https://github.com/rock-ai-bot/oe-bench/issues/14)) ([30414af](https://github.com/rock-ai-bot/oe-bench/commit/30414af798f13ad7bdd9c6e80899c3e6e34fb448))
+
 ## [1.2.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.1.0...v1.2.0) (2026-10-30)
 
 ### Features
