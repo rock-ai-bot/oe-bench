@@ -6,5 +6,45 @@
 </head>
 <body>
 <h1>Calculator</h1>
+<div id="display">0</div>
+<div id="keys">
+<button>7</button><button>8</button><button>9</button>
+<button>4</button><button>5</button><button>6</button>
+<button>1</button><button>2</button><button>3</button>
+<button>0</button><button>.</button>
+</div>
+<script>
+(function () {
+  var display = document.getElementById('display');
+  var entry = '0';
+
+  function press(key) {
+    if (key === '.') {
+      if (entry.indexOf('.') === -1) entry += '.';
+    } else if (entry === '0') {
+      entry = key;
+    } else {
+      entry += key;
+    }
+    var dot = entry.indexOf('.');
+    if (dot !== -1 && entry.length - dot - 1 > 4) entry = entry.slice(0, dot + 5);
+    display.textContent = format(entry);
+  }
+
+  // Entry keeps zeros typed after the point so later digits land correctly;
+  // the display drops them, except for the bare "0." of an unfinished number.
+  function format(text) {
+    if (text.indexOf('.') === -1 || text.charAt(text.length - 1) === '.') return text;
+    return text.replace(/0+$/, '').replace(/\.$/, '');
+  }
+
+  var buttons = document.querySelectorAll('button');
+  for (var i = 0; i < buttons.length; i++) {
+    (function (b) {
+      b.addEventListener('click', function () { press(b.textContent); });
+    })(buttons[i]);
+  }
+})();
+</script>
 </body>
 </html>
