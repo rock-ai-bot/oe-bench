@@ -62,3 +62,15 @@ test('the display shows only the result after =, with no extra text', () => {
   assert.strictEqual(page.displayTexts().length, 1);
   assert.strictEqual(page.display(), '2');
 });
+
+test('1000000.1 + 0.2 = shows 1000000.3: no noise on large decimals', () => {
+  assert.strictEqual(
+    typed(...'1000000.1'.split(''), '+', '0', '.', '2', '='),
+    '1000000.3'
+  );
+});
+
+test('a huge result keeps all its digits, with no exponent', () => {
+  const big = '1200000000000000000000000000000';
+  assert.strictEqual(typed(...big.split(''), '+', '0', '='), big);
+});

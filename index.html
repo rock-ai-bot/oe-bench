@@ -22,11 +22,24 @@
   var op = null;      // pending '+' or '-'
   var fresh = false;  // the next digit starts a new number
 
+  // Exact arithmetic: numbers are held as integers of 1/10000, matching the
+  // four decimals the keys can enter, so there is no floating-point noise
+  // and no exponent notation for huge results.
+  function toUnits(text) {
+    var parts = text.split('.');
+    return BigInt(parts[0] + ((parts[1] || '') + '0000').slice(0, 4));
+  }
+
+  function fromUnits(n) {
+    var sign = n < 0n ? '-' : '';
+    var digits = (n < 0n ? -n : n).toString().padStart(5, '0');
+    return sign + digits.slice(0, -4) + '.' + digits.slice(-4);
+  }
+
   function apply() {
     if (op === null) return;
-    var a = parseFloat(total), b = parseFloat(entry);
-    var r = op === '+' ? a + b : a - b;
-    entry = String(parseFloat(r.toFixed(10)));
+    var r = op === '+' ? toUnits(total) + toUnits(entry) : toUnits(total) - toUnits(entry);
+    entry = fromUnits(r);
     op = null;
     total = null;
   }
