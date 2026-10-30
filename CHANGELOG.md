@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.3.0...v1.4.0) (2026-10-30)
+
+### Features
+
+* flip a number between positive and negative with ± ([#15](https://github.com/rock-ai-bot/oe-bench/issues/15)) ([87e622a](https://github.com/rock-ai-bot/oe-bench/commit/87e622aee433e91c3b8dc04e1dbebd53daf88fba))
+
 ## [1.3.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.2.0...v1.3.0) (2026-10-30)
 
 ### Features
