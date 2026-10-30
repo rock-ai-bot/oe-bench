@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.0.0...v1.1.0) (2026-10-30)
+
+### Features
+
+* type numbers on the calculator display ([#12](https://github.com/rock-ai-bot/oe-bench/issues/12)) ([71537b8](https://github.com/rock-ai-bot/oe-bench/commit/71537b814fec2c6aa3af73512e9ee864f5efffcc))
+
 ## 1.0.0 (2026-10-30)
 
 ### Features
