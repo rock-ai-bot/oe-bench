@@ -1,0 +1,26 @@
+name: commits
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+jobs:
+  conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - name: Check PR title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: node scripts/check-conventional-commits.mjs --no-merge-exemption "$TITLE"
+      - name: Check commits
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git log --format=%s "$BASE..$HEAD" > subjects.txt
+          mapfile -t subjects < subjects.txt
+          node scripts/check-conventional-commits.mjs "${subjects[@]}"
