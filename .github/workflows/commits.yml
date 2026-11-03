@@ -1,6 +1,7 @@
 name: commits
 on:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
 jobs:
   conventional-commits:
     runs-on: ubuntu-latest
