@@ -5,8 +5,11 @@
     ["@semantic-release/commit-analyzer", {
       "preset": "conventionalcommits",
       "releaseRules": [
+        { "breaking": true, "release": "major" },
         { "type": "feat", "release": "minor" },
-        { "type": "fix", "release": "patch" }
+        { "type": "fix", "release": "patch" },
+        { "type": "perf", "release": "patch" },
+        { "type": "revert", "release": "patch" }
       ]
     }],
     ["@semantic-release/release-notes-generator", {
@@ -14,7 +17,11 @@
       "presetConfig": {
         "types": [
           { "type": "feat", "section": "Features" },
-          { "type": "fix", "section": "Bug Fixes" }
+          { "type": "fix", "section": "Bug Fixes" },
+          { "type": "perf", "section": "Performance Improvements" },
+          { "type": "revert", "section": "Reverts" },
+          { "type": "refactor", "section": "Code Refactoring" },
+          { "type": "docs", "section": "Documentation" }
         ]
       }
     }],
