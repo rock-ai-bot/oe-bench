@@ -7,18 +7,13 @@
   <style>
     body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: system-ui, sans-serif; background: #e8ecf1; color: #1c2430; }
     h1 { font-size: 1.25rem; margin: 0 0 0.75rem; }
-    #display { box-sizing: border-box; width: 92vw; max-width: 20rem; margin: 0 auto 0.75rem; padding: 1rem; background: #111820; color: #f2f6fa; font-size: 2.5rem; text-align: right; border-radius: 0.5rem; overflow: hidden; }
+    #display { box-sizing: border-box; width: 92vw; max-width: 20rem; margin: 0 auto 0.75rem; padding: 1rem; background: #111820; color: #f2f6fa; font-size: 2.5rem; text-align: right; border-radius: 0.5rem; white-space: nowrap; overflow-x: auto; }
     #keys { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; width: 92vw; max-width: 20rem; }
     button { min-height: 3.5rem; font-size: 1.25rem; border: 0; border-radius: 0.5rem; cursor: pointer; }
     button.digit { background: #ffffff; color: #1c2430; }
     button.aux { background: #cfd6df; color: #1c2430; }
-    button.op { grid-column: 4; background: #f28c28; color: #ffffff; }
+    button.op { grid-column: 4; grid-row: var(--row); background: #f28c28; color: #ffffff; }
     button.clear { background: #d64545; color: #ffffff; }
-    button.r1 { grid-row: 1; }
-    button.r2 { grid-row: 2; }
-    button.r3 { grid-row: 3; }
-    button.r4 { grid-row: 4; }
-    button.r5 { grid-row: 5; }
   </style>
 </head>
 <body>
@@ -38,11 +33,11 @@
     <button type="button" class="aux">.</button>
     <button type="button" class="clear">C</button>
     <button type="button" class="aux">±</button>
-    <button type="button" class="op r4">+</button>
-    <button type="button" class="op r3">-</button>
-    <button type="button" class="op r2">×</button>
-    <button type="button" class="op r1">÷</button>
-    <button type="button" class="op r5">=</button>
+    <button type="button" class="op" style="--row: 4">+</button>
+    <button type="button" class="op" style="--row: 3">-</button>
+    <button type="button" class="op" style="--row: 2">×</button>
+    <button type="button" class="op" style="--row: 1">÷</button>
+    <button type="button" class="op" style="--row: 5">=</button>
   </div>
   <script>
     var display = document.getElementById('display');
