@@ -21,6 +21,7 @@
     <button type="button">0</button>
     <button type="button">.</button>
     <button type="button">C</button>
+    <button type="button">±</button>
     <button type="button">+</button>
     <button type="button">-</button>
     <button type="button">=</button>
@@ -40,6 +41,10 @@
         total = null;
         op = null;
         fresh = false;
+      } else if (key === '±') {
+        if (scale(typed) !== 0n) {
+          typed = typed.charAt(0) === '-' ? typed.slice(1) : '-' + typed;
+        }
       } else if (key === '+' || key === '-') {
         total = op && !fresh ? apply(total, op, typed) : scale(typed);
         op = key;
