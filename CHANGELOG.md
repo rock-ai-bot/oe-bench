@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.4.0...v1.5.0) (2026-11-04)
+
+### Features
+
+* multiply and divide numbers with × and ÷ ([#16](https://github.com/rock-ai-bot/oe-bench/issues/16)) ([62ba830](https://github.com/rock-ai-bot/oe-bench/commit/62ba83027b2e508b22cc7550486b3dc476f3c437))
+
 ## [1.4.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.3.0...v1.4.0) (2026-11-04)
 
 ### Features
