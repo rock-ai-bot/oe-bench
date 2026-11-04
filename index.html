@@ -20,6 +20,7 @@
     <button type="button">3</button>
     <button type="button">0</button>
     <button type="button">.</button>
+    <button type="button">C</button>
   </div>
   <script>
     var display = document.getElementById('display');
@@ -28,7 +29,9 @@
       var button = event.target.closest('button');
       if (!button) return;
       var key = button.textContent.trim();
-      if (key === '.') {
+      if (key === 'C') {
+        typed = '0';
+      } else if (key === '.') {
         if (typed.indexOf('.') === -1) typed += '.';
       } else if (typed === '0') {
         typed = key;
