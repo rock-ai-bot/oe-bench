@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.1.0...v1.2.0) (2026-11-04)
+
+### Features
+
+* clear the display with C ([#13](https://github.com/rock-ai-bot/oe-bench/issues/13)) ([f365fa0](https://github.com/rock-ai-bot/oe-bench/commit/f365fa0fa5d8a26f56e9ecfc97a9502e7bdce561))
+
 ## [1.1.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.0.0...v1.1.0) (2026-11-04)
 
 ### Features
