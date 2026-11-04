@@ -80,7 +80,7 @@ class Node {
 
 function matchesCompound(node, sel) {
   if (!node.tag) return false;
-  const re = /^([a-z][\w-]*)?|#([\w-]+)|\.([\w-]+)|\[([\w-]+)(?:=["']?([^\]"']*)["']?)?\]/gi;
+  const re = /^([a-z][\w-]*)|#([\w-]+)|\.([\w-]+)|\[([\w-]+)(?:=["']?([^\]"']*)["']?)?\]/gi;
   let rest = sel;
   while (rest) {
     re.lastIndex = 0;
@@ -169,6 +169,7 @@ export async function loadPage() {
   const buttons = () => body.querySelectorAll('button');
 
   return {
+    document,
     // Press the button labelled exactly `label`, as a user would click it.
     press(label) {
       const matching = buttons().filter((b) => b.textContent.trim() === label);
