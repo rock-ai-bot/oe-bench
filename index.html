@@ -35,8 +35,14 @@
       } else if (typed.indexOf('.') === -1 || typed.length - typed.indexOf('.') - 1 < 4) {
         typed += key;
       }
-      display.textContent = typed;
+      display.textContent = format(typed);
     });
+    function format(text) {
+      var point = text.indexOf('.');
+      if (point === -1 || point === text.length - 1) return text;
+      var trimmed = text.replace(/0+$/, '');
+      return trimmed.charAt(trimmed.length - 1) === '.' ? trimmed.slice(0, -1) : trimmed;
+    }
   </script>
 </body>
 </html>

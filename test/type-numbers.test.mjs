@@ -68,3 +68,19 @@ test('the display shows only what was typed: no extra text or spaces', async () 
   assert.equal(page.display(), '4.2');
   assert.equal(page.display(), page.display().trim());
 });
+
+test('1 . 5 0 shows 1.5, no trailing zeros', async () => {
+  assert.equal(await typed('1', '.', '5', '0'), '1.5');
+});
+
+test('0 . 0 shows 0, no trailing zeros', async () => {
+  assert.equal(await typed('0', '.', '0'), '0');
+});
+
+test('1 . 0 5 shows 1.05, zeros typed before a digit are kept', async () => {
+  assert.equal(await typed('1', '.', '0', '5'), '1.05');
+});
+
+test('at most four decimal places are shown', async () => {
+  assert.equal(await typed('1', '.', '1', '2', '3', '4', '5'), '1.1234');
+});
