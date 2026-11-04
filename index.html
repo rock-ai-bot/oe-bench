@@ -41,13 +41,13 @@
         op = null;
         fresh = false;
       } else if (key === '+' || key === '-') {
-        total = op && !fresh ? apply(total, op, typed) : Number(typed);
+        total = op && !fresh ? apply(total, op, typed) : scale(typed);
         op = key;
-        typed = String(total);
+        typed = unscale(total);
         fresh = true;
       } else if (key === '=') {
         if (op) {
-          typed = String(apply(total, op, typed));
+          typed = unscale(apply(total, op, typed));
           total = null;
           op = null;
           fresh = true;
@@ -61,10 +61,22 @@
       }
       display.textContent = format(typed);
     });
+    function scale(text) {
+      var negative = text.charAt(0) === '-';
+      var parts = text.replace('-', '').split('.');
+      var fraction = ((parts[1] || '') + '0000').slice(0, 4);
+      var value = BigInt(parts[0] || '0') * 10000n + BigInt(fraction);
+      return negative ? -value : value;
+    }
+    function unscale(value) {
+      var negative = value < 0n;
+      var digits = String(negative ? -value : value).padStart(5, '0');
+      var text = digits.slice(0, -4) + '.' + digits.slice(-4);
+      return (negative ? '-' : '') + text;
+    }
     function apply(left, operator, right) {
-      var a = Math.round(left * 10000);
-      var b = Math.round(Number(right) * 10000);
-      return (operator === '+' ? a + b : a - b) / 10000;
+      var b = scale(right);
+      return operator === '+' ? left + b : left - b;
     }
     function enter(key) {
       if (key === '.') {
