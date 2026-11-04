@@ -13,7 +13,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 Then open http://localhost:8000/ to see `index.html`.
 
 ## Running the tests
-You need Node.js 26. From the repository root, run:
+You need Node.js 26 and Python 3 (the tests start the local server with `python3`). From the repository root, run:
 
 ```
 npm test
