@@ -21,25 +21,60 @@
     <button type="button">0</button>
     <button type="button">.</button>
     <button type="button">C</button>
+    <button type="button">+</button>
+    <button type="button">-</button>
+    <button type="button">=</button>
   </div>
   <script>
     var display = document.getElementById('display');
     var typed = '0';
+    var total = null;
+    var op = null;
+    var fresh = false;
     document.getElementById('keys').addEventListener('click', function (event) {
       var button = event.target.closest('button');
       if (!button) return;
       var key = button.textContent.trim();
       if (key === 'C') {
         typed = '0';
-      } else if (key === '.') {
+        total = null;
+        op = null;
+        fresh = false;
+      } else if (key === '+' || key === '-') {
+        total = op && !fresh ? apply(total, op, typed) : Number(typed);
+        op = key;
+        typed = String(total);
+        fresh = true;
+      } else if (key === '=') {
+        if (op) {
+          typed = String(apply(total, op, typed));
+          total = null;
+          op = null;
+          fresh = true;
+        }
+      } else {
+        if (fresh) {
+          typed = '0';
+          fresh = false;
+        }
+        enter(key);
+      }
+      display.textContent = format(typed);
+    });
+    function apply(left, operator, right) {
+      var a = Math.round(left * 10000);
+      var b = Math.round(Number(right) * 10000);
+      return (operator === '+' ? a + b : a - b) / 10000;
+    }
+    function enter(key) {
+      if (key === '.') {
         if (typed.indexOf('.') === -1) typed += '.';
       } else if (typed === '0') {
         typed = key;
       } else if (typed.indexOf('.') === -1 || typed.length - typed.indexOf('.') - 1 < 4) {
         typed += key;
       }
-      display.textContent = format(typed);
-    });
+    }
     function format(text) {
       var point = text.indexOf('.');
       if (point === -1 || point === text.length - 1) return text;
