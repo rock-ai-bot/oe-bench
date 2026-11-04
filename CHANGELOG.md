@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.2.0...v1.3.0) (2026-11-04)
+
+### Features
+
+* add and subtract numbers ([#14](https://github.com/rock-ai-bot/oe-bench/issues/14)) ([814fc54](https://github.com/rock-ai-bot/oe-bench/commit/814fc54941a52e45863c67e1d1745df18fbb138b)), closes [#6](https://github.com/rock-ai-bot/oe-bench/issues/6) [#6](https://github.com/rock-ai-bot/oe-bench/issues/6)
+
 ## [1.2.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.1.0...v1.2.0) (2026-11-04)
 
 ### Features
