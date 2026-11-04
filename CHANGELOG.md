@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.5.0...v1.6.0) (2026-11-04)
+
+### Features
+
+* style the calculator with CSS ([#18](https://github.com/rock-ai-bot/oe-bench/issues/18)) ([2b72fc2](https://github.com/rock-ai-bot/oe-bench/commit/2b72fc24916b21f646122a528eef47fcd68f405e))
+
 ## [1.5.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.4.0...v1.5.0) (2026-11-04)
 
 ### Features
