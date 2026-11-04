@@ -24,6 +24,8 @@
     <button type="button">±</button>
     <button type="button">+</button>
     <button type="button">-</button>
+    <button type="button">×</button>
+    <button type="button">÷</button>
     <button type="button">=</button>
   </div>
   <script>
@@ -41,18 +43,23 @@
         total = null;
         op = null;
         fresh = false;
+      } else if (typed === 'Error' && (key === '±' || key === '+' || key === '-' || key === '×' || key === '÷' || key === '=')) {
+        // Only a digit or C leaves Error.
       } else if (key === '±') {
         if (scale(typed) !== 0n) {
           typed = typed.charAt(0) === '-' ? typed.slice(1) : '-' + typed;
         }
-      } else if (key === '+' || key === '-') {
+      } else if (key === '+' || key === '-' || key === '×' || key === '÷') {
         total = op && !fresh ? apply(total, op, typed) : scale(typed);
+        if (total === null) return fail();
         op = key;
         typed = unscale(total);
         fresh = true;
       } else if (key === '=') {
         if (op) {
-          typed = unscale(apply(total, op, typed));
+          var result = apply(total, op, typed);
+          if (result === null) return fail();
+          typed = unscale(result);
           total = null;
           op = null;
           fresh = true;
@@ -79,9 +86,27 @@
       var text = digits.slice(0, -4) + '.' + digits.slice(-4);
       return (negative ? '-' : '') + text;
     }
+    function fail() {
+      typed = 'Error';
+      total = null;
+      op = null;
+      fresh = true;
+      display.textContent = typed;
+    }
+    // Round a quotient to a whole number, halves away from zero.
+    function divide(a, b) {
+      var negative = (a < 0n) !== (b < 0n);
+      var x = a < 0n ? -a : a;
+      var y = b < 0n ? -b : b;
+      var q = (x * 2n + y) / (y * 2n);
+      return negative ? -q : q;
+    }
     function apply(left, operator, right) {
       var b = scale(right);
-      return operator === '+' ? left + b : left - b;
+      if (operator === '+') return left + b;
+      if (operator === '-') return left - b;
+      if (operator === '×') return divide(left * b, 10000n);
+      return b === 0n ? null : divide(left * 10000n, b);
     }
     function enter(key) {
       if (key === '.') {
