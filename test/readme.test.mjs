@@ -72,7 +72,7 @@ test('every command in the README is one that works in a fresh checkout', async 
     /^git clone https:\/\/github\.com\/rock-ai-bot\/oe-bench(\.git)?$/,
     /^cd oe-bench$/,
     /^npm test$/,
-    /^python3 -m http\.server \d+$/,
+    /^python3 -m http\.server \d+( --bind 127\.0\.0\.1)?$/,
     /^git (checkout|switch) -b \S+$/,
   ];
   const lines = codeBlocks(md).flatMap((b) => b.split('\n')).map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));

@@ -7,7 +7,7 @@ The calculator is a static page with no build step. Serve it from the repository
 ```
 git clone https://github.com/rock-ai-bot/oe-bench
 cd oe-bench
-python3 -m http.server 8000
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
 Then open http://localhost:8000/ to see `index.html`.
