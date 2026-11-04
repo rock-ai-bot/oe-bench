@@ -1,3 +1,13 @@
+## [1.1.0](https://github.com/rock-ai-bot/oe-bench/compare/v1.0.0...v1.1.0) (2026-11-04)
+
+### Features
+
+* type numbers into the display ([#12](https://github.com/rock-ai-bot/oe-bench/issues/12)) ([f2f2560](https://github.com/rock-ai-bot/oe-bench/commit/f2f2560ec94121e49fe4f26a450041832b93c871)), closes [#4](https://github.com/rock-ai-bot/oe-bench/issues/4) [#4](https://github.com/rock-ai-bot/oe-bench/issues/4) [#4](https://github.com/rock-ai-bot/oe-bench/issues/4)
+
+### Documentation
+
+* write the README ([#11](https://github.com/rock-ai-bot/oe-bench/issues/11)) ([a00c800](https://github.com/rock-ai-bot/oe-bench/commit/a00c800be47d7e510a317dd18e78edf84782cbf8))
+
 ## 1.0.0 (2026-11-04)
 
 ### Features
